@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
 
 
@@ -26,7 +26,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, related_name='product', on_delete=models.CASCADE)
     created_by = models.ForeignKey(
-        User, related_name='product_creator', on_delete=models.CASCADE)
+        User, on_delete=models.CASCADE, related_name='product_creator')
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255, default='admin')
     description = models.TextField(blank=True)
@@ -38,10 +38,10 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     objects = models.Manager()
-    products = ProductManager()
+    producta = ProductManager()
 
     class Meta:
-        verbose_name_plural = 'products'
+        verbose_name_plural = 'Products'
         ordering = ('-created',)
 
     def get_absolute_url(self):
